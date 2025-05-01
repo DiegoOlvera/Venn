@@ -31,3 +31,4 @@ vennDiagram
   "Evaluar la usabilidad y UX" & "Implementación y Mantenimiento": "El feedback de los usuarios (parte del análisis) impulsa mejoras en la usabilidad."
   "Evaluar el diseño visual" & "Implementación y Mantenimiento": "El análisis del impacto del diseño puede llevar a ajustes."
   "Evaluar el rendimiento técnico" & "Implementación y Mantenimiento": "El monitoreo y análisis del rendimiento técnico son clave para el mantenimiento."
+```
