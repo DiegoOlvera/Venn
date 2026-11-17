@@ -1,0 +1,19 @@
+[ Usuario / Cliente CodeSecure ]                                    [ Plataforma CodeSecure (Servidor / API) ]
+                 │                                                                        │
+                 ├── 1. Solicitud de conexión HTTPS ─────────────────────────────────────>│
+                 │                                                                        │
+                 │<── 2. Envío de Certificado Digital X.509 (Clave Pública del Servidor) ─┤ 
+                 │    (El cliente valida el certificado con una CA de confianza)          │
+                 │                                                                        │
+                 ├── 3. Intercambio Seguro de Claves (ECDHE / Diffie-Hellman) ───────────>│
+                 │    (Ambas partes generan de forma independiente una Clave Simétrica)   │
+                 │<── (Acuerdo de sesión completado de forma segura) ─────────────────────┤
+                 │                                                                        │
+                 │                                                                        │
+                 │      [ Canal Cifrado Simétricamente (Ej. AES-256-GCM) ]                │
+                 │                                                                        │
+                 ├── 4. Envío de datos cifrados (Credenciales, licencias, consultas) ────>│
+                 │                                                                        │
+                 │                                                                        └── 5. Recuperación y Descifrado
+                 │                                                                            (El servidor descifra la información 
+                 │                                                                             usando la clave simétrica de sesión)
