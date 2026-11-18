@@ -1,0 +1,38 @@
+┌─────────────────────────────────────────────────────────────────────────────┐
+ │                ROOT CA (Autoridad de Certificación Raíz)                    │
+ │  * Estándar base: X.509 (Certificado Raíz Auto-firmado)                      │
+ └──────────────────────────────────────┬──────────────────────────────────────┘
+                                        │ 
+                                        ▼ (Envío de solicitud mediante PKCS #10 / CSR)
+ ┌─────────────────────────────────────────────────────────────────────────────┐
+ │             ISSUING CA (Autoridad de Certificación Emisora)                 │
+ │  * Emite, administra y renueva certificados activos de la plataforma        │
+ └───────┬──────────────────────────────┼──────────────────────────────┬───────┘
+         │                              │                              │
+         │ (Valida estado en tiempo     │                              │
+         │  real o histórico mediante)  │                              │
+         ▼                              ▼                              ▼
+ ┌───────────────┐              ┌───────────────┐              ┌───────────────┐
+ │ Servidor Web  │              │ Repositorio   │              │ Personal de   │
+ │    y API      │              │ de Software   │              │  NovaSoft     │
+ └───────┬───────┘              └───────┬───────┘              └───────┬───────┘
+         │                              │                              │
+         ▼                              ▼                              ▼
+ ┌───────────────────────────┐  ┌───────────────────────────┐  ┌───────────────────────────┐
+ │ Certificado de Servidor   │  │ Cert. Code Signing        │  │ Certificado de Usuario    │
+ │ (X.509 v3)                │  │ (X.509 v3)                │  │ (X.509 v3)                │
+ └───────┬───────────────────┘  └───────┬───────────────────┘  └───────┬───────────────────┘
+         │                              │                              │
+         │ Utiliza protocolo            │ Garantiza integridad y       │ Almacenado en contenedor
+         │ TLS 1.3 para cifrar el       │ autenticidad de los paquetes │ seguro PKCS #12 protegido
+         │ canal HTTPS de la API.       │ de software y actualizaciones│ con contraseña para 
+         │                              │ descargados por el cliente.  │ asegurar el No Repudio.
+         │                              │                              │
+         └──────────────────────────────┴──────────────────────────────┘
+                                        │
+                                        ▼
+             ┌─────────────────────────────────────────────────────┐
+             │     MECANISMOS DE CONTROL Y VALIDACIÓN DE ESTADOS   │
+             │  * Protocolo OCSP (Validación instantánea en línea) │
+             │  * Listas CRL (Listas de Revocación de Certificados)│
+             └─────────────────────────────────────────────────────┘
